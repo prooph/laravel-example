@@ -1,0 +1,22 @@
+sudo: false
+
+language: php
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - vendor
+
+matrix:
+    - php: 7.1
+
+before_install:
+  - composer self-update
+
+install:
+  - travis_retry composer install --no-interaction
+  - composer info -i
+
+script:
+  - composer cs
+  - composer test
